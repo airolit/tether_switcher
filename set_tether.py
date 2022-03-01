@@ -1,7 +1,3 @@
-"""
-Example code of how to read and write vehicle parameters using pymavlink
-"""
-
 from __future__ import print_function
 
 import time, struct, os
