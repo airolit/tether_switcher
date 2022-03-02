@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Launch Tethered
+Version=v0.0.1
+Icon=/home/ripxorip/Downloads/staging/qgroundcontrol.png
+Exec=python3 /home/ripxorip/dev/tether_switcher/set_tether.py
+Terminal=true
+Type=Application

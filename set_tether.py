@@ -5,6 +5,36 @@ import time, struct, os
 # Import mavutil
 from pymavlink import mavutil
 
+header = """
+   ▄████████  ▄█     ▄████████  ▄██████▄   ▄█        ▄█      ███
+  ███    ███ ███    ███    ███ ███    ███ ███       ███  ▀█████████▄
+  ███    ███ ███▌   ███    ███ ███    ███ ███       ███▌    ▀███▀▀██
+  ███    ███ ███▌  ▄███▄▄▄▄██▀ ███    ███ ███       ███▌     ███   ▀
+▀███████████ ███▌ ▀▀███▀▀▀▀▀   ███    ███ ███       ███▌     ███
+  ███    ███ ███  ▀███████████ ███    ███ ███       ███      ███
+  ███    ███ ███    ███    ███ ███    ███ ███▌    ▄ ███      ███
+  ███    █▀  █▀     ███    ███  ▀██████▀  █████▄▄██ █▀      ▄████▀
+                    ███    ███            ▀
+    ███        ▄████████     ███        ▄█    █▄       ▄████████    ▄████████
+▀█████████▄   ███    ███ ▀█████████▄   ███    ███     ███    ███   ███    ███
+   ▀███▀▀██   ███    █▀     ▀███▀▀██   ███    ███     ███    █▀    ███    ███
+    ███   ▀  ▄███▄▄▄         ███   ▀  ▄███▄▄▄▄███▄▄  ▄███▄▄▄      ▄███▄▄▄▄██▀
+    ███     ▀▀███▀▀▀         ███     ▀▀███▀▀▀▀███▀  ▀▀███▀▀▀     ▀▀███▀▀▀▀▀
+    ███       ███    █▄      ███       ███    ███     ███    █▄  ▀███████████
+    ███       ███    ███     ███       ███    ███     ███    ███   ███    ███
+   ▄████▀     ██████████    ▄████▀     ███    █▀      ██████████   ███    ███
+                                                                   ███    ███
+   ▄████████  ▄█     █▄   ▄█      ███      ▄████████    ▄█    █▄       ▄████████    ▄████████
+  ███    ███ ███     ███ ███  ▀█████████▄ ███    ███   ███    ███     ███    ███   ███    ███
+  ███    █▀  ███     ███ ███▌    ▀███▀▀██ ███    █▀    ███    ███     ███    █▀    ███    ███
+  ███        ███     ███ ███▌     ███   ▀ ███         ▄███▄▄▄▄███▄▄  ▄███▄▄▄      ▄███▄▄▄▄██▀
+▀███████████ ███     ███ ███▌     ███     ███        ▀▀███▀▀▀▀███▀  ▀▀███▀▀▀     ▀▀███▀▀▀▀▀
+         ███ ███     ███ ███      ███     ███    █▄    ███    ███     ███    █▄  ▀███████████
+   ▄█    ███ ███ ▄█▄ ███ ███      ███     ███    ███   ███    ███     ███    ███   ███    ███
+ ▄████████▀   ▀███▀███▀  █▀      ▄████▀   ████████▀    ███    █▀      ██████████   ███    ███
+                                                                                   ███    ███                                                                                                                                           ░
+"""
+
 def mavset(mav, name, value, retries=3, parm_type=None):
     '''set a parameter on a mavlink connection'''
     print("Updating parameter: " + name)
@@ -48,9 +78,14 @@ def mavset(mav, name, value, retries=3, parm_type=None):
         return False
     return True
 
-# Create the connection
+print(header)
 print("Connecting to drone..")
-master = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
+try:
+    master = mavutil.mavlink_connection("/dev/ttyACM0", baud=115200)
+except Exception as e:
+    input("Failed to connect to drone!\nMake sure that connection is established between drone and PC.\nPress enter to exit..")
+    exit()
+
 # Wait a heartbeat before sending commands
 master.wait_heartbeat()
 
