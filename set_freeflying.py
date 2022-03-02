@@ -90,7 +90,17 @@ except Exception as e:
 master.wait_heartbeat()
 
 # Set parameters
-mavset(master, 'MNT_MODE_IN', 2, parm_type=mavutil.mavlink.MAV_PARAM_TYPE_INT32)
+mavset(master, 'BAT_CRIT_THR', 0.300000011920928955, parm_type=mavutil.mavlink.MAV_PARAM_TYPE_REAL32)
+mavset(master, 'BAT_EMERGEN_THR', 0.100000001490116119, parm_type=mavutil.mavlink.MAV_PARAM_TYPE_REAL32)
+mavset(master, 'BAT_LOW_THR', 0.400000005960464478, parm_type=mavutil.mavlink.MAV_PARAM_TYPE_REAL32)
+
+mavset(master, 'COM_DL_LOSS_T', 10, parm_type=mavutil.mavlink.MAV_PARAM_TYPE_INT32)
+mavset(master, 'GF_MAX_VER_DIST', 0.000000000000000000, parm_type=mavutil.mavlink.MAV_PARAM_TYPE_REAL32)
+mavset(master, 'MNT_MODE_IN', 1, parm_type=mavutil.mavlink.MAV_PARAM_TYPE_INT32)
+mavset(master, 'NAV_DLL_ACT', 2, parm_type=mavutil.mavlink.MAV_PARAM_TYPE_INT32)
+mavset(master, 'NAV_RCL_ACT', 2, parm_type=mavutil.mavlink.MAV_PARAM_TYPE_INT32)
+mavset(master, 'RTL_RETURN_ALT', 50.000000000000000000, parm_type=mavutil.mavlink.MAV_PARAM_TYPE_REAL32)
+
 
 # Reboot before launching QGC
 print("Rebooting drone")
@@ -100,5 +110,5 @@ master.close()
 
 print("Launcing AGC in tether mode..")
 # Set a fake home for tether
-os.environ["HOME"] = "/home/ripxorip/tmp/freeflying_home"
-os.system("/home/ripxorip/dev/airolitgroundcontrol/build_x86/debug/staging/qgroundcontrol-start.sh")
+os.environ["HOME"] = "/home/gs32/freeflying_home"
+os.system("/home/gs32/AGC/agroundcontrol-start.sh")

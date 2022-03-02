@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Launch Free Flying
 Version=v0.0.1
-Icon=/home/ripxorip/Downloads/staging/qgroundcontrol.png
-Exec=python3 /home/ripxorip/dev/tether_switcher/set_freeflying.py
+Icon=/home/gs32/dev/tether_switcher/qgroundcontrol.png
+Exec=python3 /home/gs32/dev/tether_switcher/set_freeflying.py
 Terminal=true
 Type=Application
